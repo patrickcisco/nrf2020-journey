@@ -1,0 +1,19 @@
+[
+    
+    {
+        "name": "A",
+        "location": "production"
+    },
+    {
+        "name": "B",
+        "location": "production"
+    },
+    {
+        "name": "C",
+        "location": "production"
+    },
+    {
+        "name": "D",
+        "location": "production"
+    }
+]

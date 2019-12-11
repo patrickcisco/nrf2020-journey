@@ -1,26 +1,20 @@
+
 import React from 'react';
-import logo from './logo.svg';
+import FloorPlan from './components/FloorPlan';
+import FloorPlanImage from './components/FloorPlan.jpg';
+
+import { Socket } from 'react-socket-io';
+
 import './App.css';
+const uri = 'http://localhost:4001';
+const options = { transports: ['websocket'] };
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Socket uri={uri} options={options}> 
+      <FloorPlan image={FloorPlanImage}/>
+    </Socket>
+  )
 }
 
 export default App;
