@@ -6,7 +6,7 @@ const sockets = require("../sockets/sockets.js");
 
 
 
-router.put("/init", (req, res) => {
+router.put("/api/init", (req, res) => {
   const data = req.body.map(k => {
 
     let eur = new String(k["Sale_Price_EUR"]);
@@ -34,13 +34,13 @@ router.put("/init", (req, res) => {
   })
 })
 
-router.get("/tags", (req, res) => {
+router.get("/api/tags", (req, res) => {
   db.getTags({}, (result, err) => {
     res.send(result).status(200);
   })
 })
 
-router.get("/tags/:id", function(req, res) {
+router.get("/api/tags/:id", function(req, res) {
   if (req.params.id == "") {
     res.status(404).send('Not found');
   }
@@ -58,7 +58,7 @@ router.get("/tags/:id", function(req, res) {
   })
 })
 
-router.put("/devices/:id", function(req, res) {
+router.put("/api/devices/:id", function(req, res) {
   const data = {
     "id": req.params.id,
     "name": req.body.name,
@@ -93,7 +93,7 @@ router.put("/devices/:id", function(req, res) {
   })
 });
 
-router.get("/qa", function(req, res) {
+router.get("/api/qa", function(req, res) {
   db.getTags({"location": config.LOCATIONS.Distribution, "$or": [
     {"metaname": config.CASES.Good},
     {"metaname": config.CASES.Bad},
@@ -126,7 +126,7 @@ router.get("/qa", function(req, res) {
   });
 })
 
-router.put("/qa/:id", function(req, res) {
+router.put("/api/qa/:id", function(req, res) {
   const data = {
     "id": req.params.id,
     "name": req.body.name,
@@ -161,15 +161,15 @@ router.put("/qa/:id", function(req, res) {
   })
 });
 
-router.get("/picklist", (req, res) => {
+router.get("/api/picklist", (req, res) => {
   db.getTags({"pickList": true}, (result, err) => {
-    sockets.io.sockets.emit(config.EVENTS.PICKLIST, 200);
     res.send(result).status(200);
   })
 });
 
-router.put("/picklist", (req, res) => {
+router.put("/api/picklist", (req, res) => {
   db.updatePickList(req.body, (result, err) => {
+    sockets.io.sockets.emit(config.EVENTS.PICKLIST, 200);
     res.send(result).status(200);
   })
 });

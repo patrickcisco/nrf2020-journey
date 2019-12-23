@@ -2,8 +2,11 @@ const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
 var MongoDB = require('mongodb');
 
+const config = require('../config/config');
+
+
 // Connection URL
-const url = 'mongodb://localhost:27017';
+const url = `mongodb://${config.DB.Host}:${config.DB.Port}`
 
 // Database Name
 const dbName = 'nrf2020';

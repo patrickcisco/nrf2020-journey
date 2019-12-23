@@ -10,7 +10,7 @@ CASES = {
 }
 HOST = "http://localhost"
 PORT = "4001"
-SERVER = "{}:{}".format(HOST, PORT)
+SERVER = "{}:{}/api".format(HOST, PORT)
 
 def remove_bad_qa():
     filename = "config/bad_pick.json"

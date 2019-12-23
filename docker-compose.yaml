@@ -1,0 +1,16 @@
+version: '3'
+services:
+  mongodb:
+    build: ./mongo
+  backend:
+    build: ./backend
+    depends_on:
+      - mongodb
+    ports:
+      - "4001:80"
+  frontend:
+    build: ./frontend
+    depends_on:
+      - backend
+    ports:
+      - "4002:443"

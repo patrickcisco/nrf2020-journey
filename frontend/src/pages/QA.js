@@ -37,10 +37,11 @@ export default function QA(props) {
     }
 
     const onPickListEvent = (items) => {
+        console.log("pickList event!!!");
         getPickList();
     }
     const getPickList = () => {
-        axios.get('/picklist')
+        axios.get('/api/picklist')
         .then(res => {
             setPickList(res.data)
         }, error => {
@@ -48,7 +49,7 @@ export default function QA(props) {
         });
     }
     const getQAList = () => {
-        axios.get('/qa')
+        axios.get('/api/qa')
         .then(res => {
             setTags(res.data)
         }, error => {
@@ -58,7 +59,6 @@ export default function QA(props) {
     useEffect(() => {
         getPickList();
         getQAList();
-        
     },[]);
 
     return (  

@@ -15,10 +15,17 @@ const CASES = {
     Good: "KnownGoodCase", 
     Bad: "KnownBadCase",
 }
+
+const DB = {
+    Host: "mongodb",
+    Port: "27017"
+}
+
 module.exports = {
     LOCATIONS: LOCATIONS,
     CASES: CASES,
     EVENTS: EVENTS,
+    DB: DB,
  };
 
 

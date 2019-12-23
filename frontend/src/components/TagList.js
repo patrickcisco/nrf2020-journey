@@ -23,7 +23,7 @@ export default function TagList(props) {
     const removeFromPickList = (data) => {
         data.map(k => {
             k.pickList = false;
-            axios.put('/picklist', k)
+            axios.put('/api/picklist', k)
             .then((res) => {
                 console.log('updating pick list', res);
             }, (error) => {
@@ -36,7 +36,7 @@ export default function TagList(props) {
     const updatePickList = (data) => {
         data.map(k => {
             k.pickList = true;
-            axios.put('/picklist', k)
+            axios.put('/api/picklist', k)
             .then((res) => {
                 console.log('updating pick list', res);
             }, (error) => {

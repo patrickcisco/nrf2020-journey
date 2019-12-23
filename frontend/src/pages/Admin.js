@@ -30,7 +30,7 @@ const useStyles = makeStyles(theme => ({
 export default function Admin(props) {
     const [tags, setTags] = useState([]);
     const getTags = () => {
-        axios.get('/tags')
+        axios.get('/api/tags')
         .then(res => {
             setTags(res.data)
         }, error => {
