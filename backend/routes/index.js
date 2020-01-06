@@ -108,6 +108,8 @@ router.get("/api/qa", function(req, res) {
         pickListMap.set(k.upc, value)
       })
       let updatedQAList = [];
+      // TODO:
+      // Validate that no item is missing from the "pick list"
       result.forEach( k => {
         // iterate through the current selected QA Items, and compare them against the checklist.
         const itemsInPickList = pickListMap.get(k.upc);
