@@ -20,6 +20,31 @@ const useStyles = makeStyles(theme => ({
 
 export default function TagList(props) {
     const classes = useStyles();
+
+    const removeFromBatonList = (data) => {
+        data.map(k => {
+            k.batonList = false;
+            axios.put('/api/batonlist', k)
+            .then((res) => {
+                console.log('updating baton list', res);
+            }, (error) => {
+                console.error('error!', error);
+            })
+        })
+        props.reload();
+    }
+    const updateBatonList = (data) => {
+        data.map(k => {
+            k.batonList = true;
+            axios.put('/api/batonlist', k)
+            .then((res) => {
+                console.log('updating baton list', res);
+            }, (error) => {
+                console.error('error!', error);
+            })
+        })
+        props.reload();
+    }
     const removeFromPickList = (data) => {
         data.map(k => {
             k.pickList = false;
@@ -75,6 +100,20 @@ export default function TagList(props) {
                     <span/>
                 )
             }
+        },
+        {
+            title: "Baton List",
+            field: "batonList",
+            render: rowData => {
+                if (rowData.batonList) {
+                    return (
+                        <CheckCircleOutlineIcon style={{fill: 'green'}}/>
+                    )
+                }
+                return (
+                    <span/>
+                )
+            }
         }
     ]
     const options = {
@@ -92,9 +131,19 @@ export default function TagList(props) {
           options={options}
           actions={[
             {
+                tooltip: 'Add To Baton List',
+                icon: 'add',
+                onClick: (evt, data) => updateBatonList(data)
+            },              
+            {
               tooltip: 'Add To Pick List',
               icon: 'add',
               onClick: (evt, data) => updatePickList(data)
+            },
+            {
+              tooltip: 'Remove From Baton List',
+              icon: 'delete',
+              onClick: (evt, data) => removeFromBatonList(data)
             },
             {
               tooltip: 'Remove From Pick List',

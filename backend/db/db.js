@@ -52,9 +52,17 @@ const updatePickList = function(data, callback){
     })
 };
 
+const updateBatonList = function(data, callback) {
+    const db = client.db(dbName);
+    const collection = db.collection('tags');
+    collection.update({"epc": data.epc}, {"$set": {"batonList": data.batonList}}, function(err, result) {
+        callback(result, err);
+    })
+}
 
 
 module.exports = {
+    updateBatonList: updateBatonList,
     updatePickList: updatePickList,
     updateTag: updateTag,
     getTags: getTags,

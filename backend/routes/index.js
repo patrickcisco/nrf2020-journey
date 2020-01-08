@@ -3,10 +3,46 @@ const router = express.Router();
 const db = require("../db/db.js");
 const config = require("../config/config.js");
 const sockets = require("../sockets/sockets.js");
+const winston = require('winston');
 
+const logger = winston.createLogger({
+  level: 'debug',
+  format: winston.format.combine(
+    winston.format.colorize({ all: true }),
+    winston.format.simple()
+  ),
+  transports: [
+    new winston.transports.Console(),
+  //   //
+  //   // - Write all logs with level `error` and below to `error.log`
+  //   // - Write all logs with level `info` and below to `combined.log`
+  //   //
+  //   new winston.transports.File({ filename: 'error.log', level: 'error' }),
+  //   new winston.transports.File({ filename: 'combined.log' })
+  ]
+});
+//
+// If we're not in production then log to the `console` with the format:
+// `${info.level}: ${info.message} JSON.stringify({ ...rest }) `
+// 
+// if (process.env.NODE_ENV !== 'production') {
+//   logger.add(new winston.transports.Console({
+//     format: winston.format.simple()
+//   }));
+// }f
 
+const logRequest = (req) => {
+  let msg = `${req.method} ${req.path}`
+  if (req.method !== "GET") {
+    msg += `
+${JSON.stringify(req.body, null, 4)}`    
+  }
+  logger.log('info', msg);
+}
 
 router.put("/api/init", (req, res) => {
+  logRequest(req);
+
   const data = req.body.map(k => {
 
     let eur = new String(k["Sale_Price_EUR"]);
@@ -24,6 +60,7 @@ router.put("/api/init", (req, res) => {
       "location": config.LOCATIONS.Home,
       "timestamp": Math.floor(Date.now() / 1000),
       "pickList": false,
+      "batonList": false,
     }
   });
   db.init(data, (result, err) => {
@@ -35,12 +72,16 @@ router.put("/api/init", (req, res) => {
 })
 
 router.get("/api/tags", (req, res) => {
+  logRequest(req);
+
   db.getTags({}, (result, err) => {
     res.send(result).status(200);
   })
 })
 
 router.get("/api/tags/:id", function(req, res) {
+  logRequest(req);
+
   if (req.params.id == "") {
     res.status(404).send('Not found');
   }
@@ -59,6 +100,8 @@ router.get("/api/tags/:id", function(req, res) {
 })
 
 router.put("/api/devices/:id", function(req, res) {
+  logRequest(req);
+
   const data = {
     "id": req.params.id,
     "name": req.body.name,
@@ -94,6 +137,8 @@ router.put("/api/devices/:id", function(req, res) {
 });
 
 router.get("/api/qa", function(req, res) {
+  logRequest(req);
+
   db.getTags({"location": config.LOCATIONS.Distribution, "$or": [
     {"metaname": config.CASES.Good},
     {"metaname": config.CASES.Bad},
@@ -129,6 +174,8 @@ router.get("/api/qa", function(req, res) {
 })
 
 router.put("/api/qa/:id", function(req, res) {
+  logRequest(req);
+
   const data = {
     "id": req.params.id,
     "name": req.body.name,
@@ -164,17 +211,35 @@ router.put("/api/qa/:id", function(req, res) {
 });
 
 router.get("/api/picklist", (req, res) => {
+  logRequest(req);
+
   db.getTags({"pickList": true}, (result, err) => {
     res.send(result).status(200);
   })
 });
 
 router.put("/api/picklist", (req, res) => {
+  logRequest(req);
+
   db.updatePickList(req.body, (result, err) => {
     sockets.io.sockets.emit(config.EVENTS.PICKLIST, 200);
     res.send(result).status(200);
   })
 });
 
+router.put("/api/batonlist", (req, res) => {
+  logRequest(req);
+  db.updateBatonList(req.body, (result, err) => {
+    sockets.io.sockets.emit(config.EVENTS.BATONLIST, 200);
+    res.send(result).status(200);
+  })
+})
+
+router.get("/api/batonlist", (req, res) => {
+  logRequest(req);
+  db.getTags({"batonList": true}, (result, err) => {
+    res.send(result).status(200);
+  });
+})
 
 module.exports = router;

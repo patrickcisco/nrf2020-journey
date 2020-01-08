@@ -1,7 +1,8 @@
 const EVENTS = {
     QA: "event/qa",
     MAP: "event/map",
-    PICKLIST: "event/picklist"
+    PICKLIST: "event/picklist",
+    BATONLIST: "event/batonlist"
 }
 
 const LOCATIONS = {
