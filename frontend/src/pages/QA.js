@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
     width: '50%',
   },
   half: {
-      width: '50%'
+      width: '25%'
   }
 }));
 
