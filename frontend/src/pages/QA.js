@@ -11,6 +11,9 @@ import axios from 'axios';
 import { tag, string } from 'postcss-selector-parser';
 
 const useStyles = makeStyles(theme => ({
+  whiteBackground: {
+      backgroundColor: "#FFFFFF"
+  },
   title: {
       textAlign: "center",
       margin: '15px',
@@ -19,7 +22,7 @@ const useStyles = makeStyles(theme => ({
     display: 'block',
     marginLeft: 'auto',
     marginRight: 'auto',
-    width: '50%',
+    width: '25%',
   },
   half: {
       width: '50%'
@@ -61,8 +64,20 @@ export default function QA(props) {
         getQAList();
     },[]);
 
+
+    const cmp = (a, b) => {
+        if (a > b) return +1;
+        if (a < b) return -1;
+        return 0;
+    }
+    tags.sort(function(a, b) { 
+        return cmp(!a.good,!b.good) || cmp(a.upc,b.upc)
+    })
+    pickList.sort(function(a, b) { 
+        return cmp(!a.good,!b.good) || cmp(a.upc,b.upc)
+    })
     return (  
-        <div>
+        <div >
         <Event event='event/qa' handler={onTagsEvent} />
         <Event event='event/picklist' handler={onPickListEvent} />
 

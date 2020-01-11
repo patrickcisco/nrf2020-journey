@@ -61,6 +61,7 @@ router.put("/api/init", (req, res) => {
       "timestamp": Math.floor(Date.now() / 1000),
       "pickList": false,
       "batonList": false,
+      "batonName": k["BATON_NAME"]
     }
   });
   db.init(data, (result, err) => {
