@@ -10,7 +10,7 @@ CASES = {
 }
 
 
-HOST = "http://10.1.201.226"
+HOST = "http://localhost"
 PORT = "4001"
 SERVER = "{}:{}/api".format(HOST, PORT)
 

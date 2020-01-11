@@ -64,6 +64,18 @@ export default function QA(props) {
         getQAList();
     },[]);
 
+
+    const cmp = (a, b) => {
+        if (a > b) return +1;
+        if (a < b) return -1;
+        return 0;
+    }
+    tags.sort(function(a, b) { 
+        return cmp(!a.good,!b.good) || cmp(a.upc,b.upc)
+    })
+    pickList.sort(function(a, b) { 
+        return cmp(!a.good,!b.good) || cmp(a.upc,b.upc)
+    })
     return (  
         <div >
         <Event event='event/qa' handler={onTagsEvent} />
