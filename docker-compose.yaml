@@ -1,4 +1,4 @@
-version: '3'
+version: '2'
 services:
   mongodb:
     build: ./mongo
@@ -15,3 +15,7 @@ services:
     ports:
       - "4002:443"
       - "8080:8080"
+  webgl:
+    build: ./webgl
+    ports:
+      - "4006:80"

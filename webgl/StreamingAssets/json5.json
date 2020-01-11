@@ -1,0 +1,65 @@
+{
+    "bottles": [
+        {
+            "name": "A",
+            "location": "distribution"
+        },
+        {
+            "name": "B",
+            "location": "home"
+        },
+        {
+            "name": "C",
+            "location": "retail"
+        },
+        {
+            "name": "D",
+            "location": "retail"
+        },
+        {
+            "name": "E",
+            "location": "home"
+        },
+        {
+            "name": "F",
+            "location": "home"
+        },
+        {
+            "name": "G",
+            "location": "home"
+        },
+        {
+            "name": "H",
+            "location": "retail"
+        },
+        {
+            "name": "I",
+            "location": "home"
+        },
+        {
+            "name": "J",
+            "location": "retail"
+        },
+        {
+            "name": "K",
+            "location": "home"
+        },
+        {
+            "name": "L",
+            "location": "retail"
+        },
+        {
+            "name": "M",
+            "location": "home"
+        },
+        {
+            "name": "N",
+            "location": "home"
+        },
+        {
+            "name": "O",
+            "location": "home"
+        }
+    ]
+
+}
