@@ -22,10 +22,10 @@ const useStyles = makeStyles(theme => ({
     display: 'block',
     marginLeft: 'auto',
     marginRight: 'auto',
-    width: '50%',
+    width: '25%',
   },
   half: {
-      width: '25%'
+      width: '50%'
   }
 }));
 
