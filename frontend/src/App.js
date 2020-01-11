@@ -16,7 +16,7 @@ import {
 import './App.css';
 import QA from './pages/QA';
 import Admin from './pages/Admin';
-const uri = 'http://localhost:4001';
+const uri = 'http://10.1.201.226:4001';
 const options = { transports: ['websocket'] };
 
 
