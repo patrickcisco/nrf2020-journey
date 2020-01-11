@@ -57,7 +57,7 @@ router.put("/api/init", (req, res) => {
       "epc": k["EPC"],
       "inlay": k["Inlay"],
       "meta": k["Image (Ref only not for printing)"],
-      "location": config.LOCATIONS.Home,
+      "location": config.LOCATIONS.PreProduction,
       "timestamp": Math.floor(Date.now() / 1000),
       "pickList": false,
       "batonList": false,
