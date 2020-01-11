@@ -22,6 +22,11 @@ const options = { transports: ['websocket'] };
 
 function App() {
   return (
+    <div
+    style={{
+      backgroundColor: 'white',
+    }}
+    >
     <Router>
       <Socket uri={uri} options={options}> 
         <Switch>
@@ -36,6 +41,7 @@ function App() {
       </Socket>
 
     </Router>
+    </div>
   )
 }
 

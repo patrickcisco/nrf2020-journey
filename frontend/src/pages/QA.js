@@ -11,6 +11,9 @@ import axios from 'axios';
 import { tag, string } from 'postcss-selector-parser';
 
 const useStyles = makeStyles(theme => ({
+  whiteBackground: {
+      backgroundColor: "#FFFFFF"
+  },
   title: {
       textAlign: "center",
       margin: '15px',
@@ -62,7 +65,7 @@ export default function QA(props) {
     },[]);
 
     return (  
-        <div>
+        <div >
         <Event event='event/qa' handler={onTagsEvent} />
         <Event event='event/picklist' handler={onPickListEvent} />
 
