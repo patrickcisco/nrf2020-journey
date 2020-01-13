@@ -76,6 +76,8 @@ def create_db():
         items = json.load(f)
         res = requests.put(SERVER + "/init", json=items)
         print("initial database status {}".format(res.status_code))
+    create_pick_list()
+    create_baton_list()
 
 def create_pick_list():
     filename = "config/picklist.json"
@@ -84,6 +86,15 @@ def create_pick_list():
         items = json.load(f)
         for item in items:
             res = requests.put(SERVER + "/picklist", json=item)
+            print("{} item added to picklist status {}".format(item["epc"], res.status_code))
+
+def create_baton_list():
+    filename = "config/batonlist.json"
+    with open(filename, 'r') as f:
+        print("loading initial picklist {}".format(filename))
+        items = json.load(f)
+        for item in items:
+            res = requests.put(SERVER + "/batonlist", json=item)
             print("{} item added to picklist status {}".format(item["epc"], res.status_code))
 
 def main():

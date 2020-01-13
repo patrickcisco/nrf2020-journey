@@ -9,7 +9,7 @@ const LOCATIONS = {
     Home: "Home",
     Production: "Production",
     Distribution: "Distribution",
-    Retail: "Retial",
+    Retail: "Retail",
     PreProduction: "PreProduction"
 }
 
